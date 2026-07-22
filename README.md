@@ -143,5 +143,7 @@ setting keeps pointing at the app that's actually there.
 
 ## License
 
-Not yet licensed — which means nobody currently has permission to use this. A license is
-coming.
+[Apache License 2.0](LICENSE) — Copyright 2026 guray.
+
+Use it, change it, ship it. It comes with no warranty of any kind: this software deletes
+files, and you are the one deciding which.
