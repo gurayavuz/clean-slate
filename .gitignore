@@ -1,0 +1,8 @@
+# Swift build output — also where the staged .app bundle is assembled.
+.build/
+
+# macOS Finder metadata.
+.DS_Store
+
+# Generated from tools/make_icon.sh when missing.
+Resources/icon-preview.png
