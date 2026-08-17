@@ -1,5 +1,7 @@
 # Clean Slate
 
+[![Build](https://github.com/gurayavuz/clean-slate/actions/workflows/build.yml/badge.svg)](https://github.com/gurayavuz/clean-slate/actions/workflows/build.yml)
+
 Dragging an app to the Trash removes the app. It leaves everything else — preferences,
 caches, containers, launch agents, saved state, cookies — scattered across `~/Library`
 under names you'd never think to search for.
@@ -140,6 +142,14 @@ them. Trust the app window over the command line here.
 
 Installing quits the running copy first, and re-registers the login item afterwards so the
 setting keeps pointing at the app that's actually there.
+
+## Contributing
+
+Bug reports and pull requests are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). The
+most useful report is a match that was wrong or missing, with the app and path involved.
+
+Found a way to make it delete something it shouldn't? Report it privately:
+[SECURITY.md](SECURITY.md).
 
 ## License
 

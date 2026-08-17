@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: swift --version
+
+      - name: Build (debug)
+        run: swift build -c debug
+
+      - name: Build (release)
+        run: swift build -c release
+
+      # Exercises the bundling and codesign path too. No signing identity exists
+      # on the runner, so build.sh falls back to ad-hoc signing and warns — that
+      # is expected here and does not fail the build.
+      - name: Assemble app bundle
+        run: ./build.sh --no-install
+
+      # Finder re-adds com.apple.FinderInfo to a bundle the moment it sees one,
+      # and --strict rejects it even though it is not covered by the signature.
+      # Clearing xattrs is safe: the signature lives in _CodeSignature, not here.
+      - name: Verify signature
+        run: |
+          xattr -cr ".build/Clean Slate.app"
+          codesign --verify --strict --verbose=2 ".build/Clean Slate.app"
+
+      # A scan reads only; it deletes nothing. Runners grant no Full Disk Access,
+      # so this checks the CLI path runs and exits cleanly, not what it finds.
+      - name: Smoke test --scan
+        run: |
+          ".build/Clean Slate.app/Contents/MacOS/CleanSlate" \
+            --scan /System/Applications/Calculator.app
